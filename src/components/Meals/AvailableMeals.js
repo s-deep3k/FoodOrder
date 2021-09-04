@@ -24,3 +24,13 @@ const DUMMY_MEALS = [
       price: 18.99,
     },
   ];
+  const AvailableMeals = props=>{
+    const meals = DUMMY_MEALS.map(meal => <li>{meal.name}</li>)
+    return(
+        <section>
+            <ul>{meals}</ul>
+        </section>
+    )
+  }
+
+  export default AvailableMeals

@@ -1,7 +1,7 @@
 import React from "react"
-import CartIcon from "../Cart/CartIcon"
-import classes from "./HeaderCart.module.css"
 
+import classes from "./HeaderCart.module.css"
+import CartIcon from "../Cart/CartIcon"
 const HeaderCart = props =>{
     
     return(
