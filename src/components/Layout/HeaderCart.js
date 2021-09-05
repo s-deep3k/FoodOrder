@@ -2,8 +2,7 @@ import React from "react"
 
 import classes from "./HeaderCart.module.css"
 import CartIcon from "../Cart/CartIcon"
-const HeaderCart = props =>{
-    
+const HeaderCart = props =>{    
     return(
         <button className={classes.button}>
             <span className={classes.icon}>
