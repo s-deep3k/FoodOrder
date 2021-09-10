@@ -6,10 +6,10 @@ const MealItemForm = (props) => {
       <Input
         label="Amount"
         input={{
-          id: "amount_"+props.id,
-          type: 'number',
+          id: "amount_" + props.id,
+          type: "number",
           min: 1,
-          default: 1,
+          defaultValue: 1,
           max: 5,
           step: 1,
         }}
