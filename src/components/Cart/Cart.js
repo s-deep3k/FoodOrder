@@ -6,6 +6,8 @@ import classes from "./Cart.module.css";
 import CartItem from "./CartItem";
 const Cart = (props) => {
   const [isCheckout, setCheckout] = useState(false);
+  const [isSubmitting, setSubmitting] = useState(false);
+  const [didSubmit, setDidSubmit] = useState(false);
   const orderHandler = () => {
     setCheckout(true);
   };
@@ -24,6 +26,7 @@ const Cart = (props) => {
     CartCtx.removeItem(id);
   };
   const submitOrderHandler = (userData) => {
+    setSubmitting(true);
     fetch(
       "https://react-js-cd1f3-default-rtdb.asia-southeast1.firebasedatabase.app/orders.json",
       {
@@ -33,7 +36,13 @@ const Cart = (props) => {
           orderedItems: CartCtx.items,
         }),
       }
-    );
+    )
+      .then()
+      .catch((err) => console.log(err))
+      .finally((_) => {
+        setSubmitting(false);
+        setDidSubmit(true);
+      });
   };
 
   const cartItems = (
@@ -51,8 +60,8 @@ const Cart = (props) => {
       ))}
     </ul>
   );
-  return (
-    <Modal onClose={props.onClose}>
+  const cartModalContent = (
+    <React.Fragment>
       {cartItems}
       <div className={classes.total}>
         <span>Total</span>
@@ -73,6 +82,18 @@ const Cart = (props) => {
           )}
         </div>
       )}
+    </React.Fragment>
+  );
+
+  const isSubmittingModalContent = <p>Sending order data...</p>;
+
+  const didSubmitModalContent = <p>Successfully sent the order!</p>;
+
+  return (
+    <Modal onClose={props.onClose}>
+      {!isSubmitting && cartModalContent}
+      {isSubmitting && isSubmittingModalContent}
+      {!isSubmitting && didSubmit && didSubmitModalContent}
     </Modal>
   );
 };
